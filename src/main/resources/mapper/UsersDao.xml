@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.androidcoursedesign.dao.UsersDao">
+    <insert id="insertUser" parameterType="com.example.androidcoursedesign.entity.UsersEntity">
+                INSERT INTO users ( userId, userName, password, state,  email )
+                VALUES
+                ( #{userId}, #{userName}, #{passwrd}, #{state}, #{email} );
+    </insert>
+    <select id="login" resultType="com.example.androidcoursedesign.entity.UsersEntity" parameterType="com.example.androidcoursedesign.entity.UsersEntity"   >
+         select * from users
+        where userName=#{userName} and password=#{password}
+    </select>
+
+    <select id="queryUser" resultType="com.example.androidcoursedesign.entity.UsersEntity" parameterType="com.example.androidcoursedesign.entity.UsersEntity">
+         select * from users
+        where userId=#{userId}
+    </select>
+
+    <select id="queryList" resultType="com.example.androidcoursedesign.entity.UsersEntity" parameterType="com.example.androidcoursedesign.entity.UsersEntity">
+         select * from users
+    </select>
+
+    <select id="queryUserList" resultType="com.example.androidcoursedesign.entity.UsersEntity" parameterType="java.util.HashMap">
+         select * from users
+         <where>
+             <if test="userName != null">
+                 userName like %${userName}%
+             </if>
+             <if test="userId != null">
+                 AND userId like  %${userId}%
+             </if>
+             <if test="email != null">
+                 AND email like %${email}%
+             </if>
+             <if test="state != null">
+                 AND state = #{state}
+             </if>
+             <if test="userId != null">
+                 AND userId = #{userId}
+             </if>
+         </where>
+    </select>
+
+    <update id="modifyUser"  parameterType="com.example.androidcoursedesign.entity.UsersEntity">
+        update users
+        <trim prefix="set" prefixOverrides=",">
+            <if test="userName!=null">
+                userName=#{userName}
+            </if>
+            <if test="email!=null">
+                email=#{email}
+            </if>
+            <if test="passWord!=null">
+                passWord=#{passWord}
+            </if>
+            <if test="state!=null">
+                state=#{state}
+            </if>
+        </trim>
+        where userId=#{userId}
+    </update>
+</mapper>
