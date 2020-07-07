@@ -7,21 +7,35 @@ import java.util.Objects;
 @Entity
 @Table(name = "users", schema = "android_news", catalog = "")
 public class UsersEntity implements Serializable {
-    private int userId;
+    private Integer userId;
     private String userName;
     private String password;
     private Integer state;
     private String email;
 
 
+
+
     @Id
     @Column(name = "userId")
-    public int getUserId() {
+
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int useId) {
-        this.userId = useId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "UsersEntity{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", state=" + state +
+                ", email='" + email + '\'' +
+                '}';
     }
 
     @Basic

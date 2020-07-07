@@ -7,21 +7,39 @@ import java.util.Objects;
 @Entity
 @Table(name = "newsList", schema = "android_news", catalog = "")
 public class NewsListEntity implements Serializable {
-    private int newsId;
+    private Integer newsId;
     private String newsTitle;
     private String newsInfo;
     private String newsPhoto;
     private String newsDate;
     private Integer state;
+    private String userName;
+    private String classifyName;
+
+
 
     @Id
     @Column(name = "newsId")
-    public int getNewsId() {
+    public Integer getNewsId() {
         return newsId;
     }
 
-    public void setNewsId(int newsId) {
+    public void setNewsId(Integer newsId) {
         this.newsId = newsId;
+    }
+
+    @Override
+    public String toString() {
+        return "NewsListEntity{" +
+                "newsId=" + newsId +
+                ", newsTitle='" + newsTitle + '\'' +
+                ", newsInfo='" + newsInfo + '\'' +
+                ", newsPhoto='" + newsPhoto + '\'' +
+                ", newsDate='" + newsDate + '\'' +
+                ", state=" + state +
+                ", userName='" + userName + '\'' +
+                ", classifyName='" + classifyName + '\'' +
+                '}';
     }
 
     @Basic
@@ -74,6 +92,22 @@ public class NewsListEntity implements Serializable {
         this.state = state;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getClassifyName() {
+        return classifyName;
+    }
+
+    public void setClassifyName(String classifyName) {
+        this.classifyName = classifyName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,4 +125,5 @@ public class NewsListEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(newsId, newsTitle, newsInfo, newsPhoto, newsDate, state);
     }
+
 }

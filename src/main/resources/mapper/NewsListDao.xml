@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.androidcoursedesign.dao.NewsListDao">
+    <insert id="insertNewsList" parameterType="com.example.androidcoursedesign.entity.NewsListEntity">
+         insert into newsList (newsTitle,newsInfo,newsClassifyId,newsPhoto,authorId,newsDate)
+        value (#{newsTitle},#{newsInfo},#{newsClassifyId},#{newsPhoto},#{authorId},#{newsDate})
+    </insert>
+
+    <update id="modifyNewsList" parameterType="com.example.androidcoursedesign.entity.NewsListEntity">
+        update newsList
+        <trim prefix="set" prefixOverrides=",">
+            <if test="newsTitle!=null">
+                newsTitle=#{newsTitle}
+            </if>
+            <if test="newsInfo!=null">
+                newsInfo=#{newsInfo}
+            </if>
+            <if test="newsClassifyId!=null">
+                newsClassifyId=#{newsClassifyId}
+            </if>
+            <if test="newsPhoto!=null">
+                newsPhoto=#{newsPhoto}
+            </if>
+            <if test="authorId!=null">
+                authorId=#{authorId}
+            </if>
+            <if test="newsDate!=null">
+                newsDate=#{newsDate}
+            </if>
+        </trim>
+        where newsId=#{newsId}
+    </update>
+
+    <delete id="deleteNewsList" parameterType="com.example.androidcoursedesign.entity.NewsListEntity">
+         delete
+         from newsList
+        where
+            newsId=#{newsId}
+    </delete>
+
+    <select id="queryNewsList" resultType="com.example.androidcoursedesign.entity.NewsListEntity" parameterType="java.util.HashMap">
+        select authorId,classifyId,newsId,newsDate,authorId,newsPhoto,newsClassifyId,newsInfo,newsTitle,state,classifyName,userName
+        from  newsList,users,classifyList
+
+        <where>
+
+            authorId=userId and newsClassifyId=classifyId
+
+            <if test="userName != null">
+                and userName like %${userName}%
+            </if>
+            <if test="classifyName != null">
+                and classifyName like %${classifyName}%
+            </if>
+            <if test="classifyId != null">
+                and classifyId like %${classifyId}%
+            </if>
+            <if test="userId != null">
+                AND userId like  %${userId}%
+            </if>
+            <if test="newsId != null">
+                AND newsId like %${newsId}%
+            </if>
+            <if test="newsDate != null">
+                AND newsDate like %${newsDate}%
+            </if>
+            <if test="authorId != null">
+                AND authorId like %${authorId}%
+            </if>
+            <if test="newsTitle != null">
+                AND newsTitle like %${newsTitle}%
+            </if>
+            <if test="state != null">
+                AND state = #{state}
+            </if>
+
+        </where>
+
+    </select>
+
+</mapper>

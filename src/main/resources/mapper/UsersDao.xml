@@ -35,9 +35,7 @@
              <if test="state != null">
                  AND state = #{state}
              </if>
-             <if test="userId != null">
-                 AND userId = #{userId}
-             </if>
+
          </where>
     </select>
 
