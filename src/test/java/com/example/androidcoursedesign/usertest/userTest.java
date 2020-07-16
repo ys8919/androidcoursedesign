@@ -2,6 +2,8 @@ package com.example.androidcoursedesign.usertest;
 import com.example.androidcoursedesign.dao.UsersDao;
 import com.example.androidcoursedesign.entity.UsersEntity;
 import com.example.androidcoursedesign.services.ClassifyListServicesInterface;
+import com.example.androidcoursedesign.services.CommentServicesInterface;
+import com.example.androidcoursedesign.services.NewsListServicesInterface;
 import com.example.androidcoursedesign.services.UserServicesInterface;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,14 +26,15 @@ public class userTest {
     @Autowired
     private UserServicesInterface userServices;
     @Autowired
-    private ClassifyListServicesInterface classifyListServices;
+    private CommentServicesInterface commentServicesInterface;
     @Test
     public void  test(){
         UsersEntity u=new UsersEntity();
         HashMap<String,Object> c=new HashMap<String,Object>();
-        c.put("limit",1);
+        c.put("newsId",2);
+        c.put("limit",100);
         c.put("page",1);
-        u.setUserId(2);
-        System.out.println(classifyListServices.queryClassifyList(c));
+        //u.setUserId(2);
+        System.out.println(commentServicesInterface.queryComment(c));
     }
 }

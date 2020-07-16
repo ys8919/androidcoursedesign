@@ -8,6 +8,8 @@ import java.util.Objects;
 @Table(name = "newsList", schema = "android_news", catalog = "")
 public class NewsListEntity implements Serializable {
     private Integer newsId;
+    private Integer authorId;
+    private Integer newsClassifyId;
     private String newsTitle;
     private String newsInfo;
     private String newsPhoto;
@@ -28,10 +30,28 @@ public class NewsListEntity implements Serializable {
         this.newsId = newsId;
     }
 
+    public Integer getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
+    }
+
+    public Integer getNewsClassifyId() {
+        return newsClassifyId;
+    }
+
+    public void setNewsClassifyId(Integer newsClassifyId) {
+        this.newsClassifyId = newsClassifyId;
+    }
+
     @Override
     public String toString() {
         return "NewsListEntity{" +
                 "newsId=" + newsId +
+                ", authorId=" + authorId +
+                ", classifyId=" + newsClassifyId +
                 ", newsTitle='" + newsTitle + '\'' +
                 ", newsInfo='" + newsInfo + '\'' +
                 ", newsPhoto='" + newsPhoto + '\'' +
@@ -41,6 +61,8 @@ public class NewsListEntity implements Serializable {
                 ", classifyName='" + classifyName + '\'' +
                 '}';
     }
+
+
 
     @Basic
     @Column(name = "newsTitle")

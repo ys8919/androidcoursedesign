@@ -14,4 +14,6 @@ public interface NewsListServicesInterface {
     public String modifyNewsList(NewsListEntity newsListEntity);
     public String deleteNewsList(NewsListEntity newsListEntity);
     public String queryNewsList(HashMap<String,Object> hashMap);
+    public String queryNewsInfoList(HashMap<String,Object> hashMap);
+    public String queryNewsInfo(HashMap<String,Object> hashMap);
 }

@@ -14,5 +14,6 @@ public interface NewsListDao {
     public int modifyNewsList(NewsListEntity n);
     public int deleteNewsList(NewsListEntity n);
     public ArrayList<NewsListEntity> queryNewsList(HashMap<String,Object> u);
+    public ArrayList<NewsListEntity> queryNewsInfoList(HashMap<String,Object> u);
 }
 

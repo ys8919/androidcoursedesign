@@ -101,7 +101,7 @@ public class NewsListServicesInterfaceImpl implements NewsListServicesInterface 
      * @Date: 2020/7/7 22:23
      * @param hashMap: 可选：classifyName classifyId userName authorId newsId newsDate newsTitle state 必选：limit，page
      * @return: java.lang.String
-     * @Info: 分页查询新闻
+     * @Info: 分页查询新闻(无详细新闻)
      **/
     @Override
     public String queryNewsList(HashMap<String, Object> hashMap) {
@@ -109,12 +109,57 @@ public class NewsListServicesInterfaceImpl implements NewsListServicesInterface 
         int page=Integer.parseInt((String)hashMap.get("page").toString());
         PageHelper.startPage(page,limit);
         ArrayList<NewsListEntity> Classify=newsListDao.queryNewsList(hashMap);
-        PageInfo<NewsListEntity> pageinfo=new PageInfo<NewsListEntity>(Classify);
+        PageInfo<NewsListEntity> pageInfo=new PageInfo<NewsListEntity>(Classify);
         HashMap<String,Object> msg=new HashMap<String,Object>();
         msg.put("msg","");
         msg.put("flag",true);
-        msg.put("data",pageinfo.getList());
-        msg.put("count",pageinfo.getTotal());
+        msg.put("code",0);
+        msg.put("data",pageInfo.getList());
+        msg.put("count",pageInfo.getTotal());
+        return JSON.toJSONString(msg);
+    }
+
+    /**
+     * @Description:
+     * @Author: yx8991
+     * @Date: 2020/7/14 23:56
+     * @param hashMap: hashMap: 可选：classifyName classifyId userName authorId newsId newsDate newsTitle state 必选：limit，page
+     * @return: java.lang.String
+     * @Info: 分页查询新闻(有详细新闻)
+     **/
+    @Override
+    public String queryNewsInfoList(HashMap<String, Object> hashMap) {
+        int limit=Integer.parseInt((String)hashMap.get("limit").toString());
+        int page=Integer.parseInt((String)hashMap.get("page").toString());
+        System.out.println("limit"+limit+";;;page"+page);
+
+        PageHelper.startPage(page,limit);
+        ArrayList<NewsListEntity> Classify=newsListDao.queryNewsInfoList(hashMap);
+        PageInfo<NewsListEntity> pageInfo=new PageInfo<NewsListEntity>(Classify);
+        HashMap<String,Object> msg=new HashMap<String,Object>();
+        msg.put("msg","");
+        msg.put("flag",true);
+        msg.put("code",0);
+        msg.put("data",pageInfo.getList());
+        msg.put("count",pageInfo.getTotal());
+        return JSON.toJSONString(msg);
+    }
+    @Override
+    public String queryNewsInfo(HashMap<String, Object> hashMap) {
+        ArrayList<NewsListEntity> Classify=newsListDao.queryNewsInfoList(hashMap);
+        HashMap<String,Object> msg=new HashMap<String,Object>();
+        if(Classify.size()>0){
+            //NewsListEntity newsListEntity=Classify.get(0);
+
+            msg.put("msg","");
+            msg.put("flag",true);
+            msg.put("data",Classify);
+        }else{
+            msg.put("msg","新闻不存在");
+            msg.put("flag",false);
+
+        }
+
         return JSON.toJSONString(msg);
     }
 }

@@ -39,7 +39,7 @@
     </delete>
 
     <select id="queryNewsList" resultType="com.example.androidcoursedesign.entity.NewsListEntity" parameterType="java.util.HashMap">
-        select authorId,classifyId,newsId,newsDate,authorId,newsPhoto,newsClassifyId,newsInfo,newsTitle,state,classifyName,userName
+        select authorId,classifyId,newsId,newsDate,newsPhoto,newsClassifyId,newsTitle,newsList.state,classifyName,userName
         from  newsList,users,classifyList
 
         <where>
@@ -59,7 +59,47 @@
                 AND userId like  %${userId}%
             </if>
             <if test="newsId != null">
-                AND newsId like %${newsId}%
+                AND newsId like ${newsId}
+            </if>
+            <if test="newsDate != null">
+                AND newsDate like %${newsDate}%
+            </if>
+            <if test="authorId != null">
+                AND authorId like %${authorId}%
+            </if>
+            <if test="newsTitle != null">
+                AND newsTitle like %${newsTitle}%
+            </if>
+            <if test="state != null">
+                AND state = #{state}
+            </if>
+
+        </where>
+
+        ORDER BY newsId DESC
+    </select>
+    <select id="queryNewsInfoList" resultType="com.example.androidcoursedesign.entity.NewsListEntity" parameterType="java.util.HashMap">
+        select authorId,classifyId,newsId,newsDate,newsPhoto,newsClassifyId,newsInfo,newsTitle,newsList.state,classifyName,userName
+        from  newsList,users,classifyList
+
+        <where>
+
+            authorId=userId and newsClassifyId=classifyId
+
+            <if test="userName != null">
+                and userName like %${userName}%
+            </if>
+            <if test="classifyName != null">
+                and classifyName like %${classifyName}%
+            </if>
+            <if test="classifyId != null">
+                and classifyId like %${classifyId}%
+            </if>
+            <if test="userId != null">
+                AND userId like  %${userId}%
+            </if>
+            <if test="newsId != null">
+                AND newsId like ${newsId}
             </if>
             <if test="newsDate != null">
                 AND newsDate like %${newsDate}%
@@ -77,5 +117,4 @@
         </where>
 
     </select>
-
 </mapper>

@@ -6,6 +6,7 @@ import com.example.androidcoursedesign.services.CommentServicesInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,7 +27,7 @@ public class CommentController {
      * @Info: 添加评论
      **/
     @RequestMapping("insertComment")
-    public String insertComment(CommentEntity commentEntity){return commentServices.insertComment(commentEntity);}
+    public String insertComment(@RequestBody CommentEntity commentEntity){return commentServices.insertComment(commentEntity);}
     /**
      * @Description:
      * @Author: yx8991
@@ -36,7 +37,7 @@ public class CommentController {
      * @Info: 修改评论信息
      **/
     @RequestMapping("modifyComment")
-    public String modifyComment(CommentEntity commentEntity){return commentServices.modifyComment(commentEntity);}
+    public String modifyComment( @RequestBody CommentEntity commentEntity){return commentServices.modifyComment(commentEntity);}
     /**
      * @Description:
      * @Author: yx8991
@@ -46,7 +47,7 @@ public class CommentController {
      * @Info: 删除评论
      **/
     @RequestMapping("deleteComment")
-    public String deleteComment(CommentEntity commentEntity){return commentServices.deleteComment(commentEntity);}
+    public String deleteComment(@RequestBody CommentEntity commentEntity){return commentServices.deleteComment(commentEntity);}
     /**
      * @Description:
      * @Author: yx8991
@@ -56,5 +57,6 @@ public class CommentController {
      * @Info: 查询评论
      **/
     @RequestMapping("queryComment")
-    public String queryComment(HashMap<String,Object> hashMap){return commentServices.queryComment(hashMap);}
+    public String queryComment(@RequestBody HashMap<String,Object> hashMap){return commentServices.queryComment(hashMap);}
+
 }

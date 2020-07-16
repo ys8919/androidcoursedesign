@@ -5,6 +5,7 @@ import com.example.androidcoursedesign.services.NewsListServicesInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,7 +26,7 @@ public class NewsListController {
      * @Info: 增加新闻
      **/
     @RequestMapping("insertNewsList")
-    public String insertNewsList(NewsListEntity n){return newsListServices.insertNewsList(n);};
+    public String insertNewsList(@RequestBody NewsListEntity n){return newsListServices.insertNewsList(n);};
 
     /**
      * @Description:
@@ -36,7 +37,7 @@ public class NewsListController {
      * @Info: 修改新闻
      **/
     @RequestMapping("modifyNewsList")
-    public String modifyNewsList(NewsListEntity n){return newsListServices.modifyNewsList(n);};
+    public String modifyNewsList(@RequestBody NewsListEntity n){return newsListServices.modifyNewsList(n);};
     /**
      * @Description:
      * @Author: yx8991
@@ -46,15 +47,36 @@ public class NewsListController {
      * @Info: 删除新闻
      **/
     @RequestMapping("deleteNewsList")
-    public String deleteNewsList(NewsListEntity n){return newsListServices.deleteNewsList(n);};
+    public String deleteNewsList(@RequestBody NewsListEntity n){return newsListServices.deleteNewsList(n);};
     /**
      * @Description:
      * @Author: yx8991
      * @Date: 2020/7/7 22:41
-     * @param n: 可选：classifyName classifyId userName authorId newsId newsDate newsTitle state 必选：limit，page
+     * @param n: 可选：classifyName classifyId userName authorId newsId newsDate newsTitle state 必选：limit，page，code
      * @return: java.lang.String msg("提示消息")，flag（是否成功） data（NewsListEntity ）  count （总数）
-     * @Info:  分页查询新闻
+     * @Info:  分页查询新闻列表
      **/
     @RequestMapping("queryNewsList")
-    public String queryNewsList(HashMap<String,Object> n){return newsListServices.queryNewsList(n);};
+    public String queryNewsList(@RequestBody HashMap<String,Object> n){return newsListServices.queryNewsList(n);};
+
+    /**
+     * @Description:
+     * @Author: yx8991
+     * @Date: 2020/7/14 23:58
+     * @param n: 可选：classifyName classifyId userName authorId newsId newsDate newsTitle state 必选：limit，page，code
+     * @return: java.lang.String msg("提示消息")，flag（是否成功） data（NewsListEntity ）  count （总数）
+     * @Info:  分页查询新闻详细信息
+     **/
+    @RequestMapping("queryNewsInfoList")
+    public String queryNewsInfoList(@RequestBody HashMap<String,Object> n){return newsListServices.queryNewsInfoList(n);};
+    /**
+     * @Description:
+     * @Author: yx8991
+     * @Date: 2020/7/15 16:38
+     * @param n:  可选：classifyName classifyId userName authorId newsId newsDate newsTitle state 必选：limit，page，code
+     * @return: java.lang.String msg("提示消息")，flag（是否成功） data（NewsListEntity ）
+     * @Info: 返回单个新闻详细信息
+     **/
+    @RequestMapping("queryNewsInfo")
+    public String queryNewsInfo(@RequestBody HashMap<String,Object> n){return newsListServices.queryNewsInfo(n);};
 }

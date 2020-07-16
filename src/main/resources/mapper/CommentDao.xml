@@ -28,22 +28,20 @@
             id=#{id}
     </delete>
     <select id="queryCommentList" resultType="com.example.androidcoursedesign.entity.CommentEntity"  parameterType="java.util.HashMap">
-        select id,newsId,userId,commentInfo,commentDate,state,userName,newsTitle
+        select id,newsList.newsId,users.userId,commentInfo,commentDate,comment.state,userName,newsTitle
 
-        from comment,newsId,users
-
+        from android_news.`comment`,newsList,users
         <where>
-
-            id=userId and id=newsId
+            comment.userId=users.userId and comment.newsId=newsList.newsId
 
             <if test="userName != null">
                 and userName like %${userName}%
             </if>
             <if test="userId != null">
-                AND userId like  %${userId}%
+                AND users.userId=#{userId}
             </if>
             <if test="newsId != null">
-                AND newsId like %${newsId}%
+                AND newsList.newsId=#{newsId}
             </if>
             <if test="commentDate != null">
                 AND commentDate like %${commentDate}%
@@ -59,5 +57,6 @@
             </if>
 
         </where>
+        ORDER BY id DESC
     </select>
 </mapper>

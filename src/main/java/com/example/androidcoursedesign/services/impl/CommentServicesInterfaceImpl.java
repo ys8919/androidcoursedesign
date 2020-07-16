@@ -35,6 +35,7 @@ public class CommentServicesInterfaceImpl implements CommentServicesInterface {
     public String insertComment(CommentEntity commentEntity) {
         HashMap<String,Object> msg=new HashMap<String,Object>();
         commentEntity.setCommentDate(TimeUtil.getTime());
+        commentEntity.setState(0);
         if(commentDao.insertComment(commentEntity)>0)
         {
             msg.put("msg","添加成功");
@@ -108,6 +109,7 @@ public class CommentServicesInterfaceImpl implements CommentServicesInterface {
         int limit=Integer.parseInt((String)hashMap.get("limit").toString());
         int page=Integer.parseInt((String)hashMap.get("page").toString());
         PageHelper.startPage(page,limit);
+        System.out.println(hashMap.toString());
         ArrayList<CommentEntity> classify =commentDao.queryCommentList(hashMap);
         PageInfo<CommentEntity> pageinfo=new PageInfo<CommentEntity>(classify );
         HashMap<String,Object> msg=new HashMap<String,Object>();

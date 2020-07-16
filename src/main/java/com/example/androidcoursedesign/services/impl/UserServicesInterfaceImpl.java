@@ -22,6 +22,7 @@ public class UserServicesInterfaceImpl implements UserServicesInterface {
     public String login(UsersEntity u) {
         HashMap<String,Object> msg=new HashMap<String,Object>();
         UsersEntity user=usersDao.login(u);
+        //System.out.println(user.toString());
         if(user!=null)
         {
 
@@ -34,7 +35,7 @@ public class UserServicesInterfaceImpl implements UserServicesInterface {
             msg.put("msg","登录成功");
             msg.put("flag",true);
             msg.put("userId",user.getUserId());
-            msg.put("userName",user.getUserName());
+            msg.put("data",user);
         }else
         {
             msg.put("msg","登录失败");
